@@ -1,0 +1,11 @@
+.header-title{
+    font-family:'New-YorkerC';
+    font-weight: 100;
+    font-size: 20px;
+    text-align: center;
+    src:local('New-YorkerC') , url('./New-YorkerC.ttf')format('ttf');
+    width: 300px;
+    height: 100px;
+    color: #28303F;
+    text-transform: uppercase;
+}
