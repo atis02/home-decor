@@ -8,12 +8,14 @@ import {
   useTheme,
   useMediaQuery,
   IconButton,
+  Button,
 } from "@mui/material";
 import { navbarItems } from "../../data/navbar/NavbarItems.mjs";
 // import { NavLink } from "react-router-dom";
 import Image from "mui-image";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./fonts.css";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,14 +35,7 @@ const Navbar = () => {
         }}
       >
         <Container>
-          <Box
-            pt="20px"
-            sx={{
-              direction: "row",
-              //   alignItems: {lg:'none',sm},
-              justifyContent: "space-between",
-            }}
-          >
+          <Box pt="20px" direction="row" justifyContent="space-between">
             <Stack
               alignItems="end"
               justifyContent="end"
@@ -104,23 +99,34 @@ const Navbar = () => {
                     Новинки каждый день
                   </Typography>
                 </Stack>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Image
-                    src="/images/cart02.png"
-                    alt=""
-                    style={{ width: "20px", height: "20px" }}
-                  />
-                  <Typography
-                    sx={{
-                      fontSize: { lg: "17px", xs: "10px" },
-                      alignItems: "center",
-                      justifyContent: "center",
-                      direction: "row",
-                      textAlign: "center",
-                    }}
-                  >
-                    Корзина
-                  </Typography>
+                <Stack>
+                  <NavLink  to="/shopping">
+                    <Button
+                      sx={{ color: "black" }}
+                      spacing={2}
+                      className="shopping-button"
+                    >
+                      <Stack spacing={1} direction="row" alignItems="center">
+                        <Image
+                          src="/images/cart02.png"
+                          alt=""
+                          style={{ width: "20px", height: "20px" }}
+                        />
+
+                        <Typography
+                          sx={{
+                            fontSize: { lg: "15px", xs: "10px" },
+                            alignItems: "center",
+                            justifyContent: "center",
+                            direction: "row",
+                            textAlign: "center",
+                          }}
+                        >
+                          Корзина
+                        </Typography>
+                      </Stack>
+                    </Button>
+                  </NavLink>
                   <IconButton
                     onClick={toggleMobileMenu}
                     sx={{
@@ -180,7 +186,7 @@ const Navbar = () => {
             </Stack>
           </Box>
         </Drawer>
-        <Stack alignItems="center" direction="column" >
+        <Stack alignItems="center" direction="column">
           <Typography
             {...(isMobile
               ? { width: "300px", height: "100px" }
@@ -189,33 +195,41 @@ const Navbar = () => {
             direction="row"
             fontFamily="New-YorkerC"
             className="header-title"
-            {...(isMobile ?{fontSize:'20px'}:{fontSize:'38px'})}
-            >
+            {...(isMobile ? { fontSize: "20px" } : { fontSize: "38px" })}
+          >
             {isMobile
               ? "Создайте уютную атмосферу вашего дома вместе с нами"
               : "Постеры, картины, обои- для вашего интерьера "}
           </Typography>
-              </Stack>
-          <Stack direction='row' alignItems='end' justifyContent='space-around' mt={1} >
+        </Stack>
+        <Stack
+          direction="row"
+          alignItems="end"
+          justifyContent="space-around"
+          mt={1}
+        >
           <img
-              src={isMobile ? "/images/Frame 59.png" : "images/banner img 1.png"}
-              {...(isMobile
-                ? { width: "114px", height: "140px" }
-                : { width: "250px", height: "320px" })}
-              alt=""/>
-            <img
-              src={isMobile ? "/images/headerjpg2.png" : "images/Frame 2.png "}
-              {...(isMobile
-                ? { width: "88px", height: "106px" }
-                : { width: "181px", height: "234px" })}
-              alt="" />
-            <img
-              src={isMobile ? "/images/headerjpg1.png" : "images/Frame 4.jpg"}
-              {...(isMobile
-                ? { width: "101px", height: "123px" }
-                : { width: "250px", height: "320px" })}
-              position='absolute'
-              alt="" />
+            src={isMobile ? "/images/Frame 59.png" : "images/banner img 1.png"}
+            {...(isMobile
+              ? { width: "114px", height: "140px" }
+              : { width: "250px", height: "320px" })}
+            alt=""
+          />
+          <img
+            src={isMobile ? "/images/headerjpg2.png" : "images/Frame 2.png "}
+            {...(isMobile
+              ? { width: "88px", height: "106px" }
+              : { width: "181px", height: "234px" })}
+            alt=""
+          />
+          <img
+            src={isMobile ? "/images/headerjpg1.png" : "images/Frame 4.jpg"}
+            {...(isMobile
+              ? { width: "101px", height: "123px" }
+              : { width: "250px", height: "320px" })}
+            position="absolute"
+            alt=""
+          />
         </Stack>
       </Box>
     </>

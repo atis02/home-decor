@@ -25,7 +25,7 @@ export default function CatalogFetchApi() {
               <button className="dropbtn">{item.catalogTitle}</button>
               <div className="dropdown-content">
                 {item.subCatalogsName.map((elem) => (
-                  <NavLink to='/catalogs'> {elem.subcatalogTitle}</NavLink>
+                  <NavLink to={`/subcatalogs/${elem._id}`}> {elem.subcatalogTitle}</NavLink>
                   ))}
               </div>
             </div>

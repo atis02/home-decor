@@ -6,6 +6,8 @@ import CatalogFetchApi from './component/navbar/CatalogFetchApi'
 import Catalogs from './pages/contact/catalogs'
 import NotFound from './component/NotFound'
 import BaseApiImage from './pages/home/BaseApiImage'
+import Shopping from './component/navbar/Shopping'
+import ApiImage from './pages/contact/ApiImage';
 
 function App() {
   return (
@@ -14,8 +16,11 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/catalogs' element={<Catalogs/>}/>
         <Route path='*' element={<NotFound/>}/>
-        <Route path='/images' element={<BaseApiImage/>}/>
+        <Route path='/paintings' element={<BaseApiImage/>}/>
+        <Route path='/shopping' element={<Shopping/>}/>
+        <Route path='/paintings/:id' element={<ApiImage/>}/>
       </Routes>
+      <Footer/>
     </>
   );
 }
