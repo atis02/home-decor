@@ -16,7 +16,6 @@ export default function CatalogFetchApi() {
   useEffect(() => {
     apiGet();
   }, []);
-  // data.subCatalogsName.forEach(alert)
   return (
     <>
       <Box className="btns">

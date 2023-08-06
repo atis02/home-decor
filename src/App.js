@@ -3,11 +3,11 @@ import Navbar from './component/navbar/Navbar';
 import Home from './pages/home/Home';
 import Footer from './component/footer/Footer'
 import CatalogFetchApi from './component/navbar/CatalogFetchApi' 
-import Catalogs from './pages/contact/catalogs'
+import Catalogs from './pages/catalog/catalogs'
 import NotFound from './component/NotFound'
 import BaseApiImage from './pages/home/BaseApiImage'
 import Shopping from './component/navbar/Shopping'
-import ApiImage from './pages/contact/ApiImage';
+import ApiImage from './pages/catalog/ApiImage';
 
 function App() {
   return (

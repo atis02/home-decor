@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import {Box,Container,Stack,Typography,Drawer,useTheme,useMediaQuery,IconButton,} from "@mui/material";
+import {Box,Container,Stack,Typography,Drawer,useTheme,useMediaQuery,IconButton, Button,} from "@mui/material";
 import { navbarItems } from "../../data/navbar/NavbarItems.mjs";
 import Image from "mui-image";
 import MenuIcon from "@mui/icons-material/Menu";
+import { NavLink } from "react-router-dom";
 
 const CatalogNav = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,18 +39,6 @@ const CatalogNav = () => {
               spacing={2}
               sx={{ ...(isMobile ? { display: "none" } : { display: "" }) }}
             >
-              <img
-                src="/images/calling.svg"
-                alt=""
-                alignItems="end"
-                style={{ width: "20px", height: "20px" }}
-              />
-              <a
-                href="tel:+993 62 07 53 35"
-                style={{ textDecoration: "none", color: "#000" }}
-              >
-                +993 62 07 53 35
-              </a>
             </Stack>
             <Stack
               alignItems="center"
@@ -57,7 +46,7 @@ const CatalogNav = () => {
               direction="row"
             >
               <img
-                src={isMobile ? "/images/1.png" : "images/Logo.png"}
+                src={isMobile ? "/images/1.png" : "/images/Logo.png"}
                 {...(isMobile
                   ? { width: "44px", height: "49px" }
                   : { width: "220px", height: "46px" })}
@@ -89,27 +78,41 @@ const CatalogNav = () => {
                       justifyContent: "center",
                       textAlign: "center",
                     }}
+                    
                   >
-                    Новинки каждый день
+                    <a href='https://instagram.com' style={{textDecoration:'none',color:'#000'}}>
+                      Новинки каждый день
+                    </a>
                   </Typography>
                 </Stack>
                 <Stack direction="row" spacing={1} alignItems="center">
-                  <Image
-                    src="/images/cart02.png"
-                    alt=""
-                    style={{ width: "20px", height: "20px" }}
-                  />
-                  <Typography
-                    sx={{
-                      fontSize: { lg: "17px", xs: "10px" },
-                      alignItems: "center",
-                      justifyContent: "center",
-                      direction: "row",
-                      textAlign: "center",
-                    }}
-                  >
-                    Корзина
-                  </Typography>
+                  <NavLink  to="/shopping">
+                    <Button
+                      sx={{ color: "black" }}
+                      spacing={2}
+                      className="shopping-button"
+                    >
+                      <Stack spacing={1} direction="row" alignItems="center">
+                        <Image
+                          src="/images/cart02.png"
+                          alt=""
+                          style={{ width: "20px", height: "20px" }}
+                        />
+
+                        <Typography
+                          sx={{
+                            fontSize: { lg: "15px", xs: "10px" },
+                            alignItems: "center",
+                            justifyContent: "center",
+                            direction: "row",
+                            textAlign: "center",
+                          }}
+                        >
+                          Корзина
+                        </Typography>
+                      </Stack>
+                    </Button>
+                  </NavLink>
                   <IconButton
                     onClick={toggleMobileMenu}
                     sx={{
@@ -143,13 +146,11 @@ const CatalogNav = () => {
             }}
           >
             <Stack spacing={2} pt={3} alignItems="center">
-              <>
                 {navbarItems.map((item, i) => (
                   <Typography sx={{textAlign: "start",color: "#000",}}>
                     {item.title}
                   </Typography>
                 ))}
-              </>
             </Stack>
           </Box>
         </Drawer>
