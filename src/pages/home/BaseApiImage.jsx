@@ -1,17 +1,20 @@
-import { Box } from "@mui/material";
+import { Box, Skeleton, Stack } from "@mui/material";
 import Image from "mui-image";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function BaseApiImage() {
+  const [loading,SetLoading] = useState(false);
   const [data, setdata] = useState([]);
   const apiGet = () => {
     const BASE_PATH = "http://216.250.9.208:1498/api/paintings";
+    SetLoading(true);
     fetch(BASE_PATH)
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
         setdata(json);
+        SetLoading(false);
       });
   };
   useEffect(() => {
@@ -19,8 +22,25 @@ export default function BaseApiImage() {
   }, []);
   const IMAGEPATH = "http://216.250.9.208:1498/uploads/paintings/";
 
+  function Loading(){
+
+    return(
+        <Stack direction='row' spacing={2} alignItems='center' justifyContent='center' flexWrap="wrap" >
+        <Skeleton width={270} height={430} position='relative'/>
+        <Skeleton width={270} height={430} position='relative'/>
+        <Skeleton width={270} height={430} position='relative'/>
+        <Skeleton width={270} height={430} position='relative'/>
+        <Skeleton width={270} height={430} position='relative'/>
+        <Skeleton width={270} height={430} position='relative'/>
+        <Skeleton width={270} height={430} position='relative'/>
+        <Skeleton width={270} height={430} position='relative'/>
+      </Stack>
+    )
+  }
+
   return (
     <>
+    {loading?<Loading/>:
       <Box
         direction="row"
         flexWrap="wrap"
@@ -52,7 +72,7 @@ export default function BaseApiImage() {
             />
           </NavLink>
         ))}
-      </Box>
+      </Box>}
     </>
   );
 }

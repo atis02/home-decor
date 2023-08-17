@@ -1,26 +1,30 @@
-import { Router, Routes,Route } from 'react-router-dom';
-import Navbar from './component/navbar/Navbar';
-import Home from './pages/home/Home';
-import Footer from './component/footer/Footer'
-import CatalogFetchApi from './component/navbar/CatalogFetchApi' 
-import Catalogs from './pages/catalog/catalogs'
-import NotFound from './component/NotFound'
-import BaseApiImage from './pages/home/BaseApiImage'
-import Shopping from './component/navbar/Shopping'
-import ApiImage from './pages/catalog/ApiImage';
+import { Router, Routes, Route } from "react-router-dom";
+import Navbar from "./component/navbar/Navbar";
+import Home from "./pages/home/Home";
+import Footer from "./component/footer/Footer";
+import CatalogFetchApi from "./component/navbar/CatalogFetchApi";
+import Catalogs from "./pages/catalog/catalogs";
+import NotFound from "./component/NotFound";
+import BaseApiImage from "./pages/home/BaseApiImage";
+import Shopping from "./component/navbar/Shopping";
+import ApiImage from "./pages/catalog/ApiImage";
+import { CartProvider } from "react-use-cart";
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/catalogs' element={<Catalogs/>}/>
-        <Route path='*' element={<NotFound/>}/>
-        <Route path='/paintings' element={<BaseApiImage/>}/>
-        <Route path='/shopping' element={<Shopping/>}/>
-        <Route path='/paintings/:id' element={<ApiImage/>}/>
-      </Routes>
-      <Footer/>
+      <CartProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalogs" element={<Catalogs />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/paintings" element={<BaseApiImage />} />
+
+          <Route path="/shopping" element={<Shopping />} />
+          <Route path="/paintings/:id" element={<ApiImage />} />
+        </Routes>
+      </CartProvider>
+      <Footer />
     </>
   );
 }
@@ -45,9 +49,6 @@ export default App;
 // import Foods from "./pages/Contacts";
 // import Cards from "./pages/Contacts";
 // import Cities from "./pages/Contacts";
-
-
-
 
 // function App() {
 //   return (

@@ -149,8 +149,13 @@ body{
 }
 /* ====================================end of burger menu */
 .section-main{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 100px;
 
 }
+
 .main-title{
   font-size: 56px;
 }
@@ -169,8 +174,16 @@ body{
   border: 1px solid #263238;
   cursor: pointer;
   transition: all ease 0.5s;
+  width: 340px;
+  height: 110px;
+  position: sticky;
 }
 .main-btn:hover{
   background-color: #fff;
   color: #000;
+}
+.main-section-title{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }

@@ -1,212 +1,152 @@
 import React, { useEffect, useState } from "react";
 import Image from "mui-image";
-import { Accordion, AccordionDetails, AccordionSummary, Box, FormControl, ImageList, ImageListItem, InputLabel, MenuItem, Select, Stack, Typography } from "@mui/material";
+import { useCart } from "react-use-cart";
+import {
+  Box,
+  Button,
+  Skeleton,
+  Stack
+} from "@mui/material";
 import CatalogNav from "./CatalogNav";
-import Array from './Array.mjs'
+import { NavLink } from "react-router-dom";
+import BasicSelect from './Select'
 
-const localCharacter = localStorage.getItem("HomeDecor-SetImage");
-const character = JSON.parse(localCharacter);
+  const localCharacter = localStorage.getItem("HomeDecor-SetImage");
+  const character = JSON.parse(localCharacter);
 
-export default function ApiImage() {
-   function BasicSelect() {
-    
-    return (
+export default function ApiImage(props) {
+  const {addItem} = useCart();
+
+  
+  
+  function LocalStorageGetProduct(){
+    return(
       <>
-      {Array.map((item)=>{
-        <Accordion>
-        <AccordionSummary
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-          >
-          <Typography>{item.title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      })}
-      
-      {/* <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Время работы</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Как происходит оплата</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion> 
-      <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Доставка</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-       <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Сроки</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Упаковка</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>На какой бумаге печать</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Какие рамы мы продаем</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Время работы</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion> */}
-      </>
-    );
-  }
-  function Frames() {
-    const FramePath = " http://216.250.9.208:1498/api/frames/";
-    const [frames, setFrames] = useState([]);
-    const apiGet = () => {
-      fetch(FramePath)
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-          setFrames(json);
-        });
-    };
-    useEffect(() => {
-      apiGet();
-    }, []);
-    
-    return (
-      <>
-        <Stack direction={"row"} gap={3}>
-          <ImageList sx={{ width: 400, height: 450}} cols={2} rowHeight={200} >
-            {frames.map((item) => (
-              <ImageListItem key={item.img} direction='row'gap={5} justifyContent='space-around'>
-                <Image
-                  className="frame-img"
-                  width={100}
-                  height={150}
-                  alt=""
-                  src={`http://216.250.9.208:1498/uploads/paintings/${item.coverImageName.filename}`}
-                />
-                <Stack direction='row' mt={'10px'} gap='20px'className="frame-img" >
-                    <div>{item.frameSize}</div>
-                    <div>{`${item.frameСost}man`}</div>
-                </Stack>
-              </ImageListItem>
-              ))}
-          </ImageList>
-        </Stack>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <CatalogNav />
-      <Box m={"100px"} mt={"50px"}>
-        <Stack direction="row" gap={"120px"} >
+      <Box m={"100px"} mt={"50px"} >
+        <Stack direction="row" justifyContent='space-between'>
           <Image
-            width="500px"
-            height="490px"
+            width="40vw"
+            height="470px"
             direction="row"
             alt=""
             className="api-image"
             src={`http://216.250.9.208:1498/uploads/paintings/${character.coverImageName.filename}`}
           />
-          <Stack>
-            <h1 style={{ textAlign: "center" }}>{character.title}</h1>
+          <Stack alignItems='center'width='40vw'>
+            <h1 style={{ textAlign: "center",m:'0' }}>{character.title}</h1>
             <h4 style={{ textAlign: "center" }}>
               Мы подчеркнули размеры, используемые в данном интерьере.
             </h4>
             <Frames />
-          <BasicSelect/>
+            <Stack direction='row'mb={5} alignItems='center' justifyContent='flex-start'>
+              
+                <NavLink to="/shopping"><Button sx={{backgroundColor:'#687eb3',color:'#fff',width:'250px'}}onClick={()=>addItem(props.character)}>Перейти в корзину</Button></NavLink>
+              
+            </Stack>
+            <BasicSelect />
           </Stack>
         </Stack>
       </Box>
+      </>
+    )
+  }
+  
+ 
+  function Frames() {
+    const FramePath = " http://216.250.9.208:1498/api/frames/";
+    const [frames, setFrames] = useState([]);
+    const [loading,SetLoading] = useState(false);
+
+    const apiGet = () => {
+      SetLoading(true);
+      fetch(FramePath)
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          setFrames(json);
+          SetLoading(false);
+        });
+    };
+    useEffect(() => {
+      apiGet();
+    }, []);
+
+   function ShowFrames(props) {
+
+      return (
+          <Stack direction={"column"} gap={3} sx={{overflow:'auto',height:'500px',width:'500px',mb:'30px',alignItems:'center'}}>
+        Выберите размер картины и рамы:
+          {frames.map((item,index) => (
+            <Stack direction='row' gap={5}  justifyContent='center' item={item} key={index} >
+              <Image
+                className="frame-img"
+                width={100}
+                height={150}
+                alt=""
+                src={`http://216.250.9.208:1498/uploads/paintings/${item.coverImageName.filename}`}
+              />
+              <div
+              style={{
+              display:"flex",
+              flexDirection:'column',
+              alignItems:'center',
+              justifyContent:'center',
+              mt:"10px",
+              gap:"17px",
+              key:{index},
+              className:"frame-select"}}>
+              <select className="frame-select"> 
+                {character.printSizePost.map((item=>
+                <option style={{display:'flex',justifyContent:'space-between'}} 
+                >
+                    {item.prSize}
+                      --
+                    {`${item.pricePost}man`}
+                </option>))}
+              </select>
+              <select className="frame-select">
+                <option style={{display:'flex',justifyContent:'space-between'}}>
+                    {`${item.frameName}(${item.frameSize})`}
+                      --
+                    {`${item.frameСost}man`}
+                </option>
+              </select>
+              <button className="frame-btn" 
+                 onClick={() => {
+                  localStorage.setItem(
+                    `HomeDecor-SetFrame`,
+                    JSON.stringify(item)
+                  );
+                }}
+              >
+               Добавить в корзину
+                {/* {console.log(character.printSizePost.map((item)=>(item.pricePost))+item.frameСost)} */}
+              </button>
+            </div>
+            </Stack>
+          ))}
+        </Stack>
+      )
+    }
+    function Loading(){
+      return(
+        <Stack width='500px'height='500px'>
+          <Skeleton sx={{width:'100%',height:'100%'}}   direction='row' alignItems='start' justifyContent='flex-start' />
+        </Stack>
+      )
+    }
+
+    return (
+      <>
+        {loading?<Loading/>:<ShowFrames/>}
+      </>
+    );
+  }
+  
+  return (
+    <>
+        <CatalogNav />
+      <LocalStorageGetProduct/>
     </>
   );
 }

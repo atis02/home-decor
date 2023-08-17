@@ -19,6 +19,9 @@ code {
   align-items: center;
   justify-content: space-between;
 }
+.dropbtn.active{
+  background-color: red;
+}
 .btns{
   display: flex;
   justify-content: space-between;
@@ -52,8 +55,55 @@ code {
   color: blue;
 }
 .api-image{
-  border: 1px solid black;
+  border: 1px solid rgb(118, 116, 116);
+  border-radius: 10px;
+  
+}
+.frame-select{
+  width: 250px;
+  height: 30px;
+  
+}
+.frame-btn{
+  background-color: #687eb3;
+  width: 250px;
+  height: 30px;
+  color: #fff;
+  border: 1px solid rgb(117, 112, 112);
+  transition: all 0.4s ease;
+}
+.frame-btn:hover{
+  background-color: #fff;
+  color: #687eb3;
+}
+.option{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .frame-img{
-  border: 1px solid black;
+  width: 250px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tooltip{
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #000;
+}
+.tooltip .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  padding: 5px 0;
+}
+.tooltip:hover .tooltiptext{
+  visibility: visible;
 }
