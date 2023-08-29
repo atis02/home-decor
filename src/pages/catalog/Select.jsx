@@ -1,6 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import React from 'react'
-
 export default function BasicSelect() {
     return (
       <>
@@ -16,7 +15,6 @@ export default function BasicSelect() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-
         <Accordion>
           <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
             <Typography>Время работы</Typography>

@@ -1,33 +1,92 @@
 import React, { useState } from "react";
-import CatalogNav from "../../pages/catalog/CatalogNav";
+import CatalogNav from "../catalog/CatalogNav";
 import {
   Box,
   Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
   TextField,
+  Stack,
   Typography,
 } from "@mui/material";
-import BasicSelect from "../../pages/catalog/Select";
+import BasicSelect from "../catalog/Select";
 import Image from "mui-image";
 import { Delete, RemoveCircle } from "@mui/icons-material";
 import { AddCircle } from "@mui/icons-material";
+// import Formik from './Formik'
 
 const localCharacter = localStorage.getItem("HomeDecor-SetImage");
 const character = JSON.parse(localCharacter);
 const localFrame = localStorage.getItem("HomeDecor-SetFrame");
 const Frame = JSON.parse(localFrame);
+
 const Shopping = () => {
+  const Post = () => {
+    const userAddress = document.querySelector("#userAddress");
+    const userName = document.querySelector("#userName");
+    const userPhone = document.querySelector("#userPhone");
+    const giftCardNumber = document.querySelector("#giftNumber");
+    const Comments = document.querySelector("#Comments");
+    const userAccount = document.querySelector("#userAccount");
+    const Select2 = document.querySelector("#cities");
+    const Pickup = document.querySelector('#pickup');
+    const Payment = document.querySelector('#Payment');
+      const userBtn = document
+      .querySelector("#userBtn")
+      .addEventListener("click", () => createHandler());
+    const createHandler = async () => {
+      const user ={
+        CART:[  {
+              "_id":character._id,
+              "title":character.title,
+              "size": character.printSizePost[0].prSize,
+              "cost": Cost,
+              "img": character.coverImageName.filename,
+              "quantity": count
+            } ,
+            {
+              "_id":Frame._id,
+              "title":Frame.frameName,
+              "size": Frame.frameSize,
+              "cost": CostFrame,
+              "img": Frame.coverImageName.filename,
+              "quantity": count1,
+            } ],
+        address: userAddress.value,
+        name: userName.value,
+        phone: userPhone.value,
+        city: Select2.value,
+        giftCardNumber: giftCardNumber.value,
+        comments: Comments.value,
+        totalCost: TotalPrice,
+        status: "В ожидании",
+        paymentMethod: Payment.value,
+        insta: userAccount.value,
+        deliveryType: Pickup.value,
+        _id: "",
+      };
+       fetch('http://216.250.9.208:1498/api/orders',{
+          method:'POST',
+          headers:{'Content-type':'application-json'},
+          body:JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+    
+      // console.log(user);
+    }; 
+    
+    };
+    Post();
   const [age, setAge] = React.useState("");
   const [count, setCount] = useState(1);
+  const [count1, setCount1] = useState(1);
   const handleChange = (event) => {
     setAge(event.target.value);
   };
   const Cost = character.printSizePost[0].pricePost;
   const CostFrame = Frame.frameСost;
+  const FramePrice = CostFrame * count;
+  const paintingPrice = Cost * count1;
+  const TotalPrice = FramePrice + paintingPrice;
   return (
     <>
       <CatalogNav />
@@ -70,7 +129,7 @@ const Shopping = () => {
                 </Typography>
                 <button
                   onClick={() => {
-                    setCount(count + 1);
+                    setCount1(count1 + 1);
                   }}
                   style={{
                     backgroundColor: "#fff",
@@ -86,10 +145,10 @@ const Shopping = () => {
                 >
                   <AddCircle />
                 </button>
-                <Stack>{count}</Stack>
+                <Stack>{count1}</Stack>
                 <button
                   onClick={() => {
-                    setCount(count - 1);
+                    setCount1(count1 - 1);
                   }}
                   style={{
                     backgroundColor: "#fff",
@@ -124,7 +183,7 @@ const Shopping = () => {
                   color: "#fff",
                 }}
               >
-                {`${Cost} ман `}
+                {`${paintingPrice} ман `}
               </Button>
             </Stack>
           </Stack>
@@ -137,7 +196,7 @@ const Shopping = () => {
               className="api-image"
               src={`http://216.250.9.208:1498/uploads/paintings/${Frame.coverImageName.filename}`}
             />
-            <Stack direction="column" spacing={3} m='0 40px'>
+            <Stack direction="column" spacing={3} m="0 40px">
               <h3>{Frame.frameName}</h3>
               <Stack
                 direction="row"
@@ -166,7 +225,7 @@ const Shopping = () => {
                 >
                   <AddCircle />
                 </button>
-                <Stack>{count}</Stack>
+                <Stack id='Paintcount'>{count}</Stack>
                 <button
                   onClick={() => {
                     setCount(count - 1);
@@ -204,7 +263,7 @@ const Shopping = () => {
                   color: "#fff",
                 }}
               >
-                {`${CostFrame} ман `}
+                {`${FramePrice} ман `}
               </Button>
             </Stack>
           </Stack>
@@ -221,42 +280,20 @@ const Shopping = () => {
               Оформления заказа
             </Typography>
             <Typography fontSize="14px">Вид доставки</Typography>
-            <Typography
-              fontSize="18px"
-              fontWeight="bold"
-              spacing={5}
-              direction="row"
-            >
-              Самовывоз
-              <input
-                type="radio"
-                id="Самовывоз"
-                name="Вид доставки"
-                value="Самовывоз"
-              />
-              <input type="radio" id="1" name="Вид доставки" value="1" />
-            </Typography>
+              
+            <Stack direction="row" spacing={3} width="300px">
+                <select name="" id="pickup" sx={{width:"300px"}}>
+                  <option value="Pickup">Самовывоз</option>
+                  <option value="Delivery">Доставкa</option>
+                </select>
+            </Stack>
             <Stack direction="column" borderTop="2px solid #908989" spacing={2}>
               <Typography mt={2}>Способ оплаты</Typography>
-              <Stack direction="row" spacing={3}>
-                <Typography fontSize="18px" fontWeight="bold">
-                  Наличными
-                  <input
-                    type="radio"
-                    id="Наличными"
-                    name="Способ оплаты"
-                    value="Наличными"
-                  />
-                </Typography>
-                <Typography fontSize="18px" fontWeight="bold">
-                  Онлайн оплата
-                  <input
-                    type="radio"
-                    id="Онлайн оплата"
-                    name="Способ оплаты"
-                    value="Онлайн оплата"
-                  />
-                </Typography>
+              <Stack direction="row" spacing={3} width="300px">
+              <select name="" id="Payment">
+                  <option value="cash">Наличными</option>
+                  <option value="e-money">Онлайн оплата</option>
+              </select>
               </Stack>
             </Stack>
             <Stack
@@ -266,23 +303,24 @@ const Shopping = () => {
               width="300px"
             >
               <Typography mt={2}>Адрес доставки</Typography>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Город</InputLabel>
-                <Select
-                  label="Город"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  onChange={handleChange}
-                >
-                  <MenuItem value={"Ашхабад"}>Ашхабад</MenuItem>
-                  <MenuItem value={"Дашогуз"}>Дашогуз</MenuItem>
-                  <MenuItem value={"Мары"}>Мары</MenuItem>
-                  <MenuItem value={"Туркменабат"}>Туркменабат</MenuItem>
-                  <MenuItem value={"Балканабат"}>Балканабат</MenuItem>
-                </Select>
-              </FormControl>
-              <TextField id="outlined-basic" label="Адрес"></TextField>
+              {/* <FormControl fullWidth> */}
+              {/* <InputLabel id="demo-simple-select-label">Город</InputLabel> */}
+              <select
+                label="Город"
+                labelId="demo-simple-select-label"
+                id="cities"
+                className="cities"
+                // value={age}
+                onChange={handleChange}
+              >
+                <option value="Ашхабад">Ашхабад</option>
+                <option value="Дашогуз">Дашогуз</option>
+                <option value="Мары">Мары</option>
+                <option value="Туркменабат">Туркменабат</option>
+                <option value="Балканабат">Балканабат</option>
+              </select>
+              {/* </FormControl> */}
+              <TextField id="userAddress" label="Адрес" type="text"></TextField>
             </Stack>
             <Stack
               direction="column"
@@ -291,12 +329,17 @@ const Shopping = () => {
               width="300px"
             >
               <Typography mt={2}>Ваши контакты</Typography>
-              <TextField id="outlined-basic" label="Фамилия, имя"></TextField>
+              <TextField
+                id="userName"
+                label="Фамилия, имя"
+                type="text"
+              ></TextField>
               <Stack alignItems="center" direction="row">
                 <TextField
                   sx={{ width: "245px" }}
-                  id="outlined-basic"
+                  id="userPhone"
                   label="Номер телефона (+993)"
+                  type="number"
                 ></TextField>
                 <Stack
                   border="1px solid #908989"
@@ -316,8 +359,9 @@ const Shopping = () => {
               <Stack alignItems="center" direction="row">
                 <TextField
                   sx={{ width: "245px" }}
-                  id="outlined-basic"
+                  id="userAccount"
                   label="Вы в Instagram"
+                  type="text"
                 ></TextField>
                 <Stack
                   border="1px solid #908989"
@@ -337,12 +381,17 @@ const Shopping = () => {
                   </span>
                 </Stack>
               </Stack>
-              <TextField id="outlined-basic" label="Комментарий"></TextField>
+              <TextField
+                id="Comments"
+                label="Комментарий"
+                type="text"
+              ></TextField>
               <Stack alignItems="center" direction="row">
                 <TextField
                   sx={{ width: "245px" }}
-                  id="outlined-basic"
+                  id="giftNumber"
                   label="Номер подарочного сертификата"
+                  type="number"
                 ></TextField>
                 <Stack
                   border="1px solid #908989"
@@ -359,8 +408,11 @@ const Shopping = () => {
                   ?<span className="tooltiptext">Your gift card number</span>
                 </Stack>
               </Stack>
-              <h3>Итого:{CostFrame+Cost}</h3>
+              <h3 id="totalPrice" className="totalPrice">Итого:{`${TotalPrice} ман `}</h3>
               <Button
+                className="FormName"
+                id="userBtn"
+                type="submit"
                 sx={{
                   backgroundColor: "blue",
                   color: "white",
@@ -370,6 +422,7 @@ const Shopping = () => {
                 Оформить заказ
               </Button>
               <BasicSelect />
+              {/* <Formik/> */}
             </Stack>
           </Stack>
         </Stack>
@@ -377,5 +430,4 @@ const Shopping = () => {
     </>
   );
 };
-
 export default Shopping;

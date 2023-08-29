@@ -8,7 +8,7 @@ import {
   Stack
 } from "@mui/material";
 import CatalogNav from "./CatalogNav";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import BasicSelect from './Select'
 
   const localCharacter = localStorage.getItem("HomeDecor-SetImage");
@@ -16,9 +16,6 @@ import BasicSelect from './Select'
 
 export default function ApiImage(props) {
   const {addItem} = useCart();
-
-  
-  
   function LocalStorageGetProduct(){
     return(
       <>
@@ -50,8 +47,6 @@ export default function ApiImage(props) {
       </>
     )
   }
-  
- 
   function Frames() {
     const FramePath = " http://216.250.9.208:1498/api/frames/";
     const [frames, setFrames] = useState([]);
@@ -120,7 +115,6 @@ export default function ApiImage(props) {
                 }}
               >
                Добавить в корзину
-                {/* {console.log(character.printSizePost.map((item)=>(item.pricePost))+item.frameСost)} */}
               </button>
             </div>
             </Stack>
@@ -135,14 +129,12 @@ export default function ApiImage(props) {
         </Stack>
       )
     }
-
     return (
       <>
         {loading?<Loading/>:<ShowFrames/>}
       </>
     );
   }
-  
   return (
     <>
         <CatalogNav />
